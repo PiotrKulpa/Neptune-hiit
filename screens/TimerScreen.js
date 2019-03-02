@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import Container from '../components/Container';
 
 export default class TimerScreen extends Component {
   render() {
     return (
-      <View>
-        <Text> Timer </Text>
-      </View>
+        <Container>
+          <Text> Timer </Text>
+          <Text> Add</Text>
+        </Container>
     )
   }
 }

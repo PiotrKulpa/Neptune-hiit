@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ImageBackground } from 'react-native';
+import imageBack from '../assets/images/background.jpg';
+import { AdMobBanner,} from 'expo';
+import styles from '../stylesheet/container';
 
 export default class Container extends Component {
   render() {
     return (
-      <View>
-        {this.props.children}
-      </View>
+        <ImageBackground 
+          source={imageBack} 
+          style={styles.wrapper}
+        >
+          <View style={styles.content}>
+            {this.props.children}
+          </View>
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+            testDeviceID="EMULATOR"
+            onDidFailToReceiveAdWithError={this.bannerError} 
+          />
+        </ImageBackground>
     )
   }
 }
