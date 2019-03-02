@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
 //TODO: add background, logo, images, and basic layout
+//use BackgroundImage to add bg image
 export default class Container extends Component {
   render() {
     return (
