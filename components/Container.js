@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { Text, View, ImageBackground } from 'react-native';
 import imageBack from '../assets/images/background.jpg';
+import { AdMobBanner,} from 'expo';
+import styles from '../stylesheet/container';
 
-//TODO: add background, logo, images, and basic layout
-//use BackgroundImage to add bg image
 export default class Container extends Component {
   render() {
     return (
-      <View>
         <ImageBackground 
           source={imageBack} 
-          style={{width: '100%', height: '100%'}}
+          style={styles.wrapper}
         >
-          {this.props.children}
+          <View style={styles.content}>
+            {this.props.children}
+          </View>
+          <AdMobBanner
+            bannerSize="fullBanner"
+            adUnitID="ca-app-pub-3940256099942544/6300978111" // Test ID, Replace with your-admob-unit-id
+            testDeviceID="EMULATOR"
+            onDidFailToReceiveAdWithError={this.bannerError} 
+          />
         </ImageBackground>
-      </View>
     )
   }
 }

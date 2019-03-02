@@ -7,6 +7,7 @@ export default class TimerScreen extends Component {
     return (
         <Container>
           <Text> Timer </Text>
+          <Text> Add</Text>
         </Container>
     )
   }

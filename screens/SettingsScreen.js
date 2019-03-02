@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import Container from '../components/Container';
 
 export default class SettingsScreen extends Component {
   render() {
     return (
-      <View>
-        <Text> Settings </Text>
-      </View>
+      <Container>
+        <Text> Settings</Text>
+      </Container>
     )
   }
 }
