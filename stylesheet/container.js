@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   },
   content: {
     color: 'white',
-    marginTop: Constants.statusBarHeight + 60
+    marginTop: Constants.statusBarHeight + 60,
+    alignSelf: 'center',
   },
 });
 

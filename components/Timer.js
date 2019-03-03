@@ -5,12 +5,15 @@ import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
 
 export default class Timer extends Component {
+  
+  onPressBtn() {
+    alert('ok')
+  }
+
   render() {
     return (
       <View>
-        <MainButton>
-          <Text>START</Text>
-        </MainButton>
+        
         <View style={styles.ring}>
           <View style={styles.ring}>
             <ProgressCircle
@@ -26,6 +29,16 @@ export default class Timer extends Component {
             </ProgressCircle>
           </View>
         </View>
+
+        <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+          <MainButton >
+            <Text>START</Text>
+          </MainButton>
+          <MainButton>
+            <Text>RESET</Text>
+          </MainButton>
+        </View>
+
       </View>
     )
   }

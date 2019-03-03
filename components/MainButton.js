@@ -4,15 +4,14 @@ import styles from '../stylesheet/mainButton';
 
 const MainButton = props => {
   return (
-    <View>
       <TouchableWithoutFeedback
       >
         <View style={styles.btnBg}>
-          {props.children}
+          <Text style={styles.btnTxt}>
+            {props.children}
+          </Text>
         </View>
-      </TouchableWithoutFeedback>
-      
-    </View>
+      </TouchableWithoutFeedback>  
   )
 }
 
