@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Container from '../components/Container';
+import Timer from '../components/Timer';
 
 export default class TimerScreen extends Component {
   render() {
     return (
         <Container>
-          <Text> Timer </Text>
-          <Text> Add</Text>
+          <Timer></Timer>
         </Container>
     )
   }
