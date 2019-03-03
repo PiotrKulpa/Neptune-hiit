@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, ImageBackground } from 'react-native';
+import { View, ImageBackground } from 'react-native';
 import imageBack from '../assets/images/background.jpg';
-import { AdMobBanner,} from 'expo';
+import { AdMobBanner, } from 'expo';
 import styles from '../stylesheet/container';
 
 export default class Container extends Component {

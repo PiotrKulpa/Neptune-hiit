@@ -2,6 +2,7 @@ import { createAppContainer, createMaterialTopTabNavigator } from 'react-navigat
 import TimerScreen from '../screens/TimerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
+import { Constants } from 'expo';
 
 const RouteConfigs = {
   Timer: { screen: TimerScreen },
@@ -19,19 +20,23 @@ const TabNavigatorConfig = {
       position: 'absolute',
       left: 0,
       right: 0,
-      top: 40,
+      top: Constants.statusBarHeight + 0,
       height: 50,
       zIndex: 99,
       elevation: 0,       //remove shadow on Android
       shadowOpacity: 0,
+      padding: 0,
+      margin: 0,
     },
     inactiveTintColor: 'rgba(66,93,155,0.5)',
     labelStyle: {
-      fontSize: 22,
+      fontSize: 25,
     },
     tabStyle: {
       borderWidth: 0,
-      shadowColor: 'transparent'
+      shadowColor: 'transparent',
+      padding: 0,
+      margin: 0,
     },
     indicatorStyle: {
       backgroundColor: 'transparent',
