@@ -5,6 +5,7 @@ import styles from '../stylesheet/mainButton';
 const MainButton = props => {
   return (
       <TouchableWithoutFeedback
+      {...props}
       >
         <View style={styles.btnBg}>
           <Text style={styles.btnTxt}>
