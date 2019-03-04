@@ -31,7 +31,6 @@ const TabNavigatorConfig = {
     inactiveTintColor: 'rgba(66,93,155,0.5)',
     labelStyle: {
       fontSize: 25,
-      fontFamily: 'sans-pro-light'
     },
     tabStyle: {
       borderWidth: 0,
