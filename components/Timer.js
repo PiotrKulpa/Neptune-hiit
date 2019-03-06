@@ -5,13 +5,13 @@ import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
 import { Font } from 'expo';
 
-export default class Timer extends Component {
+class Timer extends Component {
 
   state = {
     timerAnim: new Animated.Value(100),
     counter: 0,
     fontsLoaded: false,
-    duration: 30,
+    duration: 5,
   }
 
   componentDidMount() {
@@ -23,10 +23,8 @@ export default class Timer extends Component {
   onStart = () => {
     // starts timer
     // pauses timer
-    console.log('starts')
     this.state.timerAnim.addListener(({value}) => {
       this._value = value;
-      //console.log(parseInt(value))
       this.setState({counter: parseInt(value)})
     });
     this.onAnimate();
@@ -34,7 +32,7 @@ export default class Timer extends Component {
 
   onReset = () => {
     // reset timer
-    //this.state.timerAnim.stopAnimation()
+    // this.state.timerAnim.stopAnimation()
     this.state.timerAnim.resetAnimation()
     this.state.timerAnim.removeAllListeners()
   }
@@ -102,3 +100,5 @@ export default class Timer extends Component {
     )
   }
 }
+
+export default Timer;
