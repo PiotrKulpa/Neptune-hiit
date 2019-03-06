@@ -5,6 +5,12 @@ import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
 import { Font } from 'expo';
 
+// TODO: add method to repeat timer x times
+// import redux
+// read intervals state
+// read length of state
+// reapeat timer x-length times
+// change only duration based on array index
 class Timer extends Component {
 
   state = {
