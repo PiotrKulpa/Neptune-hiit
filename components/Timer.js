@@ -4,6 +4,7 @@ import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
 import { Font } from 'expo';
+import { connect } from 'react-redux';
 
 // TODO: add method to repeat timer x times
 // import redux
@@ -17,7 +18,7 @@ class Timer extends Component {
     timerAnim: new Animated.Value(100),
     counter: 0,
     fontsLoaded: false,
-    duration: 5,
+    duration: this.props.intervals[0],
   }
 
   componentDidMount() {
@@ -44,16 +45,22 @@ class Timer extends Component {
   }
 
   onAnimate() {
-    Animated.timing(                 
-      this.state.timerAnim,            
-      {
-        toValue: 0,
-        duration: this.state.duration * 1000,
-        easing: Easing.inOut(Easing.linear),
-        useNativeDriver: true,
-        delay: 1000
-      }
-    ).start() 
+    const {intervals} = this.props;
+    let n = 0;
+    Animated.loop(
+      
+      Animated.timing(                 
+        this.state.timerAnim,            
+        {
+          toValue: 0,
+          duration: intervals[n] * 1000,
+          easing: Easing.inOut(Easing.linear),
+          useNativeDriver: false,
+          delay: 1000
+        }
+      ),
+      {iterations: intervals.length}
+    ).start()
    }
 
   render() {
@@ -107,4 +114,9 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+const mapStateToProps = state => {
+  return {
+    intervals: state.intervals
+  }
+}
+export default connect(mapStateToProps)(Timer);
