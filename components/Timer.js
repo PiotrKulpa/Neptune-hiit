@@ -14,7 +14,10 @@ import { connect } from 'react-redux';
 // change only duration based on array index
 class Timer extends Component {
 
+  
+
   state = {
+    n: 0,
     timerAnim: new Animated.Value(100),
     counter: 0,
     fontsLoaded: false,
@@ -30,11 +33,24 @@ class Timer extends Component {
   onStart = () => {
     // starts timer
     // pauses timer
+    let n = 0;
     this.state.timerAnim.addListener(({value}) => {
       this._value = value;
-      this.setState({counter: parseInt(value)})
+      //console.log(value)
+      this.setState({counter: parseInt(value)});
+      
+      if(value === 0) {
+        this.state.timerAnim.resetAnimation();
+        if(n === this.props.intervals.length -1) {
+          n = 0;
+          this.setState({duration: 0});
+          return;
+        };
+        n++;
+        this.setState({duration: this.props.intervals[n]}, this.onAnimate(n));
+      }; 
     });
-    this.onAnimate();
+    this.setState({duration: this.props.intervals[0]}, this.onAnimate(n));
   }
 
   onReset = () => {
@@ -44,23 +60,21 @@ class Timer extends Component {
     this.state.timerAnim.removeAllListeners()
   }
 
-  onAnimate() {
+  onAnimate(n) {
     const {intervals} = this.props;
-    let n = 0;
-    Animated.loop(
-      
+    console.log('onAnimate: '+n);
+    
       Animated.timing(                 
         this.state.timerAnim,            
         {
           toValue: 0,
-          duration: intervals[n] * 1000,
-          easing: Easing.inOut(Easing.linear),
+          duration: this.props.intervals[n] * 1000,
+          easing: Easing.linear,
           useNativeDriver: false,
           delay: 1000
         }
-      ),
-      {iterations: intervals.length}
-    ).start()
+      ).start()
+    
    }
 
   render() {
