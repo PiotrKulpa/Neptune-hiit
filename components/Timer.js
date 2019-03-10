@@ -18,10 +18,10 @@ class Timer extends Component {
 
   state = {
     n: 0,
-    timerAnim: new Animated.Value(100),
+    timerAnim: new Animated.Value(100), //value for timer arc animation
     counter: 0,
     fontsLoaded: false,
-    duration: this.props.intervals[0],
+    duration: this.props.intervals[0], // durations in seconds
   }
 
   componentDidMount() {
@@ -33,7 +33,9 @@ class Timer extends Component {
   onStart = () => {
     // starts timer
     // pauses timer
+    this.state.timerAnim.resetAnimation();
     let n = 0;
+    this.state.timerAnim._value = 100;
     this.state.timerAnim.addListener(({value}) => {
       this._value = value;
       //console.log(value)
@@ -41,9 +43,14 @@ class Timer extends Component {
       
       if(value === 0) {
         this.state.timerAnim.resetAnimation();
+        // methods after animation finish
         if(n === this.props.intervals.length -1) {
+          this.state.timerAnim.removeAllListeners()
           n = 0;
-          this.setState({duration: 0});
+          this.state.timerAnim._value = 0;
+          this.setState({
+            duration: 0,
+          });
           return;
         };
         n++;
@@ -56,8 +63,10 @@ class Timer extends Component {
   onReset = () => {
     // reset timer
     // this.state.timerAnim.stopAnimation()
-    this.state.timerAnim.resetAnimation()
-    this.state.timerAnim.removeAllListeners()
+    this.state.timerAnim.resetAnimation();
+    this.state.timerAnim.removeAllListeners();
+    this.state.timerAnim._value = 100;
+    this.setState({duration: this.props.intervals[0]})
   }
 
   onAnimate(n) {
