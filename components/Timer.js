@@ -4,14 +4,24 @@ import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
 import { Font } from 'expo';
+import { connect } from 'react-redux';
 
+// TODO: add method to repeat timer x times
+// import redux
+// read intervals state
+// read length of state
+// reapeat timer x-length times
+// change only duration based on array index
 class Timer extends Component {
 
+  
+
   state = {
-    timerAnim: new Animated.Value(100),
+    n: 0,
+    timerAnim: new Animated.Value(100), //value for timer arc animation
     counter: 0,
     fontsLoaded: false,
-    duration: 5,
+    duration: this.props.intervals[0], // durations in seconds
   }
 
   componentDidMount() {
@@ -23,31 +33,57 @@ class Timer extends Component {
   onStart = () => {
     // starts timer
     // pauses timer
+    this.state.timerAnim.resetAnimation();
+    let n = 0;
+    this.state.timerAnim._value = 100;
     this.state.timerAnim.addListener(({value}) => {
       this._value = value;
-      this.setState({counter: parseInt(value)})
+      //console.log(value)
+      this.setState({counter: parseInt(value)});
+      
+      if(value === 0) {
+        this.state.timerAnim.resetAnimation();
+        // methods after animation finish
+        if(n === this.props.intervals.length -1) {
+          this.state.timerAnim.removeAllListeners()
+          n = 0;
+          this.state.timerAnim._value = 0;
+          this.setState({
+            duration: 0,
+          });
+          return;
+        };
+        n++;
+        this.setState({duration: this.props.intervals[n]}, this.onAnimate(n));
+      }; 
     });
-    this.onAnimate();
+    this.setState({duration: this.props.intervals[0]}, this.onAnimate(n));
   }
 
   onReset = () => {
     // reset timer
     // this.state.timerAnim.stopAnimation()
-    this.state.timerAnim.resetAnimation()
-    this.state.timerAnim.removeAllListeners()
+    this.state.timerAnim.resetAnimation();
+    this.state.timerAnim.removeAllListeners();
+    this.state.timerAnim._value = 100;
+    this.setState({duration: this.props.intervals[0]})
   }
 
-  onAnimate() {
-    Animated.timing(                 
-      this.state.timerAnim,            
-      {
-        toValue: 0,
-        duration: this.state.duration * 1000,
-        easing: Easing.inOut(Easing.linear),
-        useNativeDriver: true,
-        delay: 1000
-      }
-    ).start() 
+  onAnimate(n) {
+    const {intervals} = this.props;
+    console.log('onAnimate: '+n);
+    
+      Animated.timing(                 
+        this.state.timerAnim,            
+        {
+          toValue: 0,
+          duration: this.props.intervals[n] * 1000,
+          easing: Easing.linear,
+          useNativeDriver: false,
+          delay: 1000
+        }
+      ).start()
+    
    }
 
   render() {
@@ -101,4 +137,9 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+const mapStateToProps = state => {
+  return {
+    intervals: state.intervals
+  }
+}
+export default connect(mapStateToProps)(Timer);
