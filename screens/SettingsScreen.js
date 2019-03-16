@@ -6,6 +6,7 @@ import { setIntervals } from '../redux/actions'
 import ApplyButton from '../components/ApplyButton';
 import Inputs from '../components/Inputs';
 import styles from '../stylesheet/inputs';
+import { Formik } from 'formik';
 
 //TODO: export variables from inputs to Timer component
 class SettingsScreen extends Component {
@@ -18,24 +19,42 @@ class SettingsScreen extends Component {
       <Container>
 
         <ScrollView style={{flex: 1, margin: 0}}>
-          <View>
-            <Text style={styles.labels}>
-              SETS
-            </Text>
-          </View>
-          <TextInput
-            keyboardType={'numeric'}
-            style={styles.inputs}
-            />
-          <Inputs></Inputs>
+          
+            <Formik
+              initialValues={{ test: '', sets: '1' }}
+              onSubmit={values => console.log(values)}
+            >
+              {props => (
+                <View>
+                  <View>
+                  <Text style={styles.labels}>
+                    SETS
+                  </Text>
+                </View>
+                <TextInput
+                  keyboardType={'numeric'}
+                  style={styles.inputs}
+                  value={props.values.sets}
+                  />
+                  <TextInput
+                    onChangeText={props.handleChange('email')}
+                    onBlur={props.handleBlur('email')}
+                    value={props.values.test}
+                  />
+                  <Inputs></Inputs>
+                  <ApplyButton
+                    {...this.props}
+                      onPress={props.handleSubmit}  
+                    >
+                      Apply
+                  </ApplyButton>
+                </View>
+              )}
+            </Formik>
+         
         </ScrollView>
        
-          <ApplyButton
-          {...this.props}
-            onPress={this.onApply}  
-          >
-            Apply
-          </ApplyButton>
+         
         
       </Container>
     )
