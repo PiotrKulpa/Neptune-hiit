@@ -10,8 +10,25 @@ import { Formik } from 'formik';
 
 //TODO: export variables from inputs to Timer component
 class SettingsScreen extends Component {
+
+  state = {
+    sets: [{active: '30', rest: '30'}]
+  }
+
   onApply() {
     alert('Apply btn')
+  }
+
+  onActiveInputChange(i) {
+    // pobiera pozycje obiektu z tablicy
+    // uaktualnia wartość active
+    alert(i);
+  }
+
+  onRestInputChange(i) {
+    // pobiera pozycje obiektu z tablicy
+    // uaktualnia wartość rest
+    alert(i);
   }
 
   render() {
@@ -34,14 +51,37 @@ class SettingsScreen extends Component {
                 <TextInput
                   keyboardType={'numeric'}
                   style={styles.inputs}
-                  value={props.values.sets}
+                  defaultValue={props.values.sets}
+                  onChange={this.onApply}
                   />
-                  <TextInput
+                  {/* <TextInput
                     onChangeText={props.handleChange('email')}
                     onBlur={props.handleBlur('email')}
                     value={props.values.test}
-                  />
-                  <Inputs></Inputs>
+                  /> */}
+                  {this.state.sets.map((el, i) => 
+                    <View key={i}>
+                      <View>
+                        <Text style={styles.labels}>ACTIVE INTERVAL</Text>
+                        <TextInput
+                            keyboardType={'numeric'}
+                            style={styles.inputs}
+                            defaultValue={el.active}
+                            onChange={i => this.onActiveInputChange(i)}
+                        >
+                        </TextInput>
+                      </View>
+                      <View>
+                        <Text style={styles.labels}>REST INTERVAL</Text>
+                        <TextInput
+                            keyboardType={'numeric'}
+                            style={{height: 40, borderColor: 'gray', borderBottomWidth: 1, color: 'white'}}
+                            defaultValue={el.rest}
+                        >
+                        </TextInput>
+                      </View>
+                    </View>
+                  )}
                   <ApplyButton
                     {...this.props}
                       onPress={props.handleSubmit}  
