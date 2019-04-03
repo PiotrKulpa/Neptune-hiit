@@ -19,10 +19,12 @@ class SettingsScreen extends Component {
     alert('Apply btn')
   }
 
-  onActiveInputChange(i) {
+  onActiveInputChange(value, i) {
     // pobiera pozycje obiektu z tablicy
     // uaktualnia wartość active
-    alert(i);
+    // waliduj input, spróbuj zamienić na liczbę, jeśli się nie uda
+    // Number() deaktywuj przycisk apply
+    console.log(value, i);
   }
 
   onRestInputChange(i) {
@@ -62,12 +64,12 @@ class SettingsScreen extends Component {
                   {this.state.sets.map((el, i) => 
                     <View key={i}>
                       <View>
-                        <Text style={styles.labels}>ACTIVE INTERVAL</Text>
+                        <Text style={styles.labels}>ACTIVE INTERVAL {i}</Text>
                         <TextInput
                             keyboardType={'numeric'}
                             style={styles.inputs}
                             defaultValue={el.active}
-                            onChange={i => this.onActiveInputChange(i)}
+                            onChangeText={(value)=> this.onActiveInputChange(value, i)}
                         >
                         </TextInput>
                       </View>
@@ -102,7 +104,7 @@ class SettingsScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
+  //console.log(state)
   return {
     intervals: state.intervals
   }
