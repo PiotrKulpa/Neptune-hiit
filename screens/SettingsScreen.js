@@ -24,13 +24,29 @@ class SettingsScreen extends Component {
     // uaktualnia wartość active
     // waliduj input, spróbuj zamienić na liczbę, jeśli się nie uda
     // Number() deaktywuj przycisk apply
-    console.log(value, i);
+    
+    // 1. Make a shallow copy of the items
+    let items = [...this.state.sets];
+    
+    // 2. Make a shallow copy of the item you want to mutate
+    let item = {...items[i]};
+    
+    // 3. Replace the property you're intested in
+    item.active = value;
+    console.log(item);
+    // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+    items[i] = item;
+    // 5. Set the state to our new copy
+    this.setState({sets: items});
+
+    console.log(this.state.sets)
   }
 
-  onRestInputChange(i) {
+  onRestInputChange(value, i) {
     // pobiera pozycje obiektu z tablicy
     // uaktualnia wartość rest
-    alert(i);
+    console.log(value, i);
+    console.log(this.state.sets)
   }
 
   render() {
@@ -79,6 +95,7 @@ class SettingsScreen extends Component {
                             keyboardType={'numeric'}
                             style={{height: 40, borderColor: 'gray', borderBottomWidth: 1, color: 'white'}}
                             defaultValue={el.rest}
+                            onChangeText={(value)=> this.onRestInputChange(value, i)}
                         >
                         </TextInput>
                       </View>
