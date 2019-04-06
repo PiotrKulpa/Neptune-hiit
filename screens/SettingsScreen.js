@@ -12,11 +12,17 @@ import { Formik } from 'formik';
 class SettingsScreen extends Component {
 
   state = {
-    sets: [{active: '30', rest: '30'}]
+    sets: [{active: '30', rest: '30'}],
+    deactivate: false,
   }
 
   onApply() {
     alert('Apply btn')
+  }
+
+  onChangeSets() {
+    console.log('sets have changed');
+    
   }
 
   onActiveInputChange(value, i) {
@@ -24,6 +30,9 @@ class SettingsScreen extends Component {
     // uaktualnia wartość active
     // waliduj input, spróbuj zamienić na liczbę, jeśli się nie uda
     // Number() deaktywuj przycisk apply
+    // TODO exclude none
+    let regex = /^[0-9]*$/g;
+    if(value.match(regex)) {
     
     // 1. Make a shallow copy of the items
     let items = [...this.state.sets];
@@ -39,7 +48,8 @@ class SettingsScreen extends Component {
     // 5. Set the state to our new copy
     this.setState({sets: items});
 
-    console.log(this.state.sets)
+    //console.log(this.state.sets)
+    }
   }
 
   onRestInputChange(value, i) {
@@ -70,7 +80,7 @@ class SettingsScreen extends Component {
                   keyboardType={'numeric'}
                   style={styles.inputs}
                   defaultValue={props.values.sets}
-                  onChange={this.onApply}
+                  onChange={this.onChangeSets}
                   />
                   {/* <TextInput
                     onChangeText={props.handleChange('email')}
@@ -103,7 +113,8 @@ class SettingsScreen extends Component {
                   )}
                   <ApplyButton
                     {...this.props}
-                      onPress={props.handleSubmit}  
+                      onPress={() => this.onApply()} 
+                      disabled={this.state.deactivate} 
                     >
                       Apply
                   </ApplyButton>
