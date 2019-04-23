@@ -13,15 +13,30 @@ class SettingsScreen extends Component {
 
   state = {
     sets: [{active: '30', rest: '30'}],
+    setsNumber: 1,
     deactivate: false,
   }
 
   onApply() {
-    alert('Apply btn')
+    console.log(this.state.sets);
+    
   }
 
-  onChangeSets() {
-    console.log('sets have changed');
+  onChangeSets(value) {
+    console.log('sets have changed:' + value);
+    let setsNumber = Number(value),
+        newSet = [];
+
+        // TODO: zmień na metode niemutującą tablicy
+
+        for(i = 0; i < setsNumber; i++) {
+          newSet.push({active: '30', rest: '30'});
+        }
+
+
+    this.setState({sets: newSet});
+
+
     
   }
 
@@ -80,7 +95,7 @@ class SettingsScreen extends Component {
                   keyboardType={'numeric'}
                   style={styles.inputs}
                   defaultValue={props.values.sets}
-                  onChange={this.onChangeSets}
+                  onChangeText={value => this.onChangeSets(value)}
                   />
                   {/* <TextInput
                     onChangeText={props.handleChange('email')}
@@ -90,7 +105,7 @@ class SettingsScreen extends Component {
                   {this.state.sets.map((el, i) => 
                     <View key={i}>
                       <View>
-                        <Text style={styles.labels}>ACTIVE INTERVAL {i}</Text>
+                        <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
                         <TextInput
                             keyboardType={'numeric'}
                             style={styles.inputs}
@@ -100,7 +115,7 @@ class SettingsScreen extends Component {
                         </TextInput>
                       </View>
                       <View>
-                        <Text style={styles.labels}>REST INTERVAL</Text>
+                        <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
                         <TextInput
                             keyboardType={'numeric'}
                             style={{height: 40, borderColor: 'gray', borderBottomWidth: 1, color: 'white'}}
