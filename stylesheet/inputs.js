@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
   labels: {
     color: colors.middleBlue,
     marginTop: 20,
+  },
+  setsBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
   }
 });
 
