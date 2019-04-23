@@ -4,6 +4,7 @@ import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { setIntervals } from '../redux/actions'
 import ApplyButton from '../components/ApplyButton';
+import IncDecButton from '../components/IncDecButton';
 import Inputs from '../components/Inputs';
 import styles from '../stylesheet/inputs';
 
@@ -95,24 +96,24 @@ class SettingsScreen extends Component {
     return (
       <Container>
         <ScrollView style={{flex: 1, margin: 0}}>
-            <View style={styles.setsBox}>
-              <View>
-                <Text style={styles.labels}>
-                  SET(S)
-                </Text>
-              </View>
-            <Button
-              onPress={()=> this.onAddSet()}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-            <Button
-              onPress={()=> this.onRemoveSet()}
-              title="Learn More"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
+          <View style={styles.setsBox}>
+            <View style={styles.setsLabel}>
+              <Text style={styles.labels}>
+                {this.state.setsNumber}: SET(S)
+              </Text>
+            </View>
+            <View style={styles.btnsLabel}>
+              <IncDecButton
+                onPress={()=> this.onAddSet()}
+              >
+              +
+              </IncDecButton>
+              <IncDecButton
+                onPress={()=> this.onRemoveSet()}
+              >
+              -
+              </IncDecButton>
+            </View>
           </View>
             
             {this.state.sets && this.state.sets.map((el, i) => 

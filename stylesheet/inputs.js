@@ -14,8 +14,19 @@ const styles = StyleSheet.create({
   },
   setsBox: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     flex: 1,
+  },
+  setsLabel: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  btnsLabel: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   }
 });
 
