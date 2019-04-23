@@ -2,30 +2,28 @@ import React, { Component } from 'react';
 import { Text, ScrollView, TextInput, View, Button, } from 'react-native';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
-//import { setIntervals } from '../redux/actions'
+import { setIntervals } from '../redux/actions'
 import ApplyButton from '../components/ApplyButton';
 import Inputs from '../components/Inputs';
 import styles from '../stylesheet/inputs';
 
-//TODO: export variables from inputs to Timer component
 class SettingsScreen extends Component {
 
   state = {
-    sets: [{active: '30', rest: '30'}, {active: '40', rest: '40'}],
+    sets: [{active: '5', rest: '5'},],
     setsNumber: 1,
     deactivate: false,
   }
 
   onApply() {
-    //console.log(this.state.sets);
-
     let setsToNumbers = this.state.sets.map(el => {
       return [Number(el.active), Number(el.rest)];
     });
-    // TODO: pass array to redux
-    //this.props.setIntervals([].concat.apply([], setsToNumbers));
 
-    console.log([].concat.apply([], setsToNumbers));
+    let setsToArray = [].concat.apply([], setsToNumbers);
+    this.props.setIntervals(setsToArray);
+
+    console.log(setsToArray);
     
   }
 
