@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Neptune - HIIT Timer",
-    "slug": "expo.io/@piotrkulpa/hiit",
+    "slug": "hiit",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
