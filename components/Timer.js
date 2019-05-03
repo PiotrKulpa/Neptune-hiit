@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, Easing, } from 'react-native';
+import { Text, View, Animated, Easing, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
@@ -61,6 +61,7 @@ class Timer extends Component {
 
         // methods after all sets finished
         if(n === this.props.intervals.length -1) {
+          Vibration.vibrate([0, 100, 200, 100, 200, 100]);
           this.state.timerAnim.removeAllListeners();
           n = 0;
           this.state.timerAnim._value = 0;
@@ -68,7 +69,6 @@ class Timer extends Component {
             duration: 0,
             msg: 'Nice job! You have finished all intervals.'
           });
-          //TODO write record to DB
           this.writeToDB();
           return;
         };
@@ -95,6 +95,7 @@ class Timer extends Component {
 
   onAnimate(n) {
     const {intervals} = this.props;
+    Vibration.vibrate(500);
     
       Animated.timing(                 
         this.state.timerAnim,            

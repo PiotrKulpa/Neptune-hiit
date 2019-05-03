@@ -132,7 +132,7 @@ class SettingsScreen extends Component {
                   <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
                   <TextInput
                       keyboardType={'numeric'}
-                      style={{height: 40, borderColor: 'gray', borderBottomWidth: 1, color: 'white'}}
+                      style={[styles.inputs, styles.inputsRest]}
                       defaultValue={el.rest}
                       onChangeText={(value)=> this.onRestInputChange(value, i)}
                   >
@@ -140,14 +140,15 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             )}
-            <ApplyButton
+            
+        </ScrollView>
+        <ApplyButton
               {...this.props}
                 onPress={() => this.onApply()} 
                 disabled={this.state.deactivate} 
               >
                 Apply
             </ApplyButton>
-        </ScrollView>
       </Container>
     )
   }
