@@ -117,26 +117,36 @@ class SettingsScreen extends Component {
           </View>
             
             {this.state.sets && this.state.sets.map((el, i) => 
-              <View key={i}>
-                <View>
-                  <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
-                  <TextInput
-                      keyboardType={'numeric'}
-                      style={styles.inputs}
-                      defaultValue={el.active}
-                      onChangeText={(value)=> this.onActiveInputChange(value, i)}
-                  >
-                  </TextInput>
+              <View style={styles.inputsContainer} key={i}>
+                
+                <View style={styles.inputsNumber}>
+                  <View style={styles.inputsNumberTxtBorder}>
+                    <Text style={styles.inputsNumberTxt}>
+                      {i+1}
+                    </Text>
+                  </View>
                 </View>
-                <View>
-                  <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
-                  <TextInput
-                      keyboardType={'numeric'}
-                      style={[styles.inputs, styles.inputsRest]}
-                      defaultValue={el.rest}
-                      onChangeText={(value)=> this.onRestInputChange(value, i)}
-                  >
-                  </TextInput>
+                <View style={styles.inputsRow}>
+                  <View>
+                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
+                    <TextInput
+                        style={styles.inputsActive}
+                        keyboardType={'numeric'}
+                        defaultValue={el.active}
+                        onChangeText={(value)=> this.onActiveInputChange(value, i)}
+                    >
+                    </TextInput>
+                  </View>
+                  <View style={styles.inputRestBox}>
+                    <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
+                    <TextInput
+                        style={styles.inputsRest}
+                        keyboardType={'numeric'}
+                        defaultValue={el.rest}
+                        onChangeText={(value)=> this.onRestInputChange(value, i)}
+                    >
+                    </TextInput>
+                  </View>
                 </View>
               </View>
             )}
