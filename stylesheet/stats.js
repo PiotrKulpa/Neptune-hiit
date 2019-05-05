@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   tableTd: {
     color: 'white',

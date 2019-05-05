@@ -10,7 +10,7 @@ import { NavigationEvents } from 'react-navigation';
 import Done from './Done';
 
 
-//TODO: style msg
+//TODO:
 // load sound
 
 const soundObject = new Expo.Audio.Sound();
@@ -41,22 +41,30 @@ class Timer extends Component {
         'create table if not exists intervals (id integer primary key not null, date text, sets int, value int);'
       );
     });
+
+    
   }
 
-  async onLoadSound() {
-    try {
-      await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
-      await soundObject.playAsync();
-      console.log('onLoadSound');
-      // Your sound is playing!
-    } catch (error) {
-      // An error occurred!
-      console.log(error);   
-    }
+  onLoadSound() {
+
+    (async() => {
+      try {
+        await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
+        await soundObject.playAsync();
+        console.log('onLoadSound');
+        // Your sound is playing!
+      } catch (error) {
+        // An error occurred!
+        console.log(error);   
+      }
+    }) ();
+    
   }
 
   
   onStart = () => {
+
+    this.onLoadSound();
     // reset timer
     this.state.timerAnim.resetAnimation();
     // reset counter
@@ -90,7 +98,7 @@ class Timer extends Component {
         this.setState({duration: this.props.intervals[n]}, this.onAnimate(n));
       }; 
     });
-    this.onLoadSound();
+    
     this.setState({
       duration: this.props.intervals[0],
       wellDone: false,
@@ -129,12 +137,6 @@ class Timer extends Component {
     this.setState({
       duration: this.props.intervals[0]
     });
-
-    console.log(this.props.intervals[0]);
-
-    this.onLoadSound()
-
-    
   }
 
   writeToDB() {
