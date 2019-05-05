@@ -3,13 +3,17 @@ import { Text, View, Animated, Easing, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
-import { Font, SQLite } from 'expo';
+import { Font, SQLite, Audio } from 'expo';
+import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
+import Done from './Done';
 
 
 //TODO: style msg
-// write record to db
+// load sound
+
+const soundObject = new Expo.Audio.Sound();
 
 const db = SQLite.openDatabase('results');
 
@@ -21,7 +25,7 @@ class Timer extends Component {
     counter: 0,
     fontsLoaded: false,
     duration: this.props.intervals[0], // durations in seconds
-    msg: '',
+    wellDone: false,
   }
 
   componentDidMount() {
@@ -37,8 +41,18 @@ class Timer extends Component {
         'create table if not exists intervals (id integer primary key not null, date text, sets int, value int);'
       );
     });
-    
-    
+  }
+
+  async onLoadSound() {
+    try {
+      await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
+      await soundObject.playAsync();
+      console.log('onLoadSound');
+      // Your sound is playing!
+    } catch (error) {
+      // An error occurred!
+      console.log(error);   
+    }
   }
 
   
@@ -67,7 +81,7 @@ class Timer extends Component {
           this.state.timerAnim._value = 0;
           this.setState({
             duration: 0,
-            msg: 'Nice job! You have finished all intervals.'
+            wellDone: true,
           });
           this.writeToDB();
           return;
@@ -76,9 +90,10 @@ class Timer extends Component {
         this.setState({duration: this.props.intervals[n]}, this.onAnimate(n));
       }; 
     });
+    this.onLoadSound();
     this.setState({
       duration: this.props.intervals[0],
-      msg: '',
+      wellDone: false,
     }, this.onAnimate(n));
   }
 
@@ -89,7 +104,7 @@ class Timer extends Component {
     this.state.timerAnim._value = 100;
     this.setState({
       duration: this.props.intervals[0],
-      msg: '',
+      wellDone: false,
     })
   }
 
@@ -116,6 +131,9 @@ class Timer extends Component {
     });
 
     console.log(this.props.intervals[0]);
+
+    this.onLoadSound()
+
     
   }
 
@@ -156,8 +174,15 @@ class Timer extends Component {
                   shadowColor="#1d305b"
                   bgColor="#304876"
               >
-                  <Text style={{ fontSize: 68, color: "#35e3ee", }}>{timerTime}</Text>
-                  <Text style={{ fontSize: 22, color: "white", }}>{'to Complete'}</Text>
+                  <View style={!this.state.wellDone ? {display: 'flex'} : {display: 'none'}}>
+                    <Text style={{ fontSize: 68, color: "#35e3ee", textAlign: 'center'}}>{timerTime}</Text>
+                    <Text style={{ fontSize: 22, color: "white", }}>{'to Complete'}</Text>
+                  </View>
+                  <View style={this.state.wellDone ? {display: 'flex'} : {display: 'none'}}>
+                    {this.state.wellDone && <Done />}
+                    
+                    <Text style={{ fontSize: 22, color: "white", }}>{'Well Done!'}</Text>
+                  </View>
               </ProgressCircle>
             </Animated.View>
           </View>
