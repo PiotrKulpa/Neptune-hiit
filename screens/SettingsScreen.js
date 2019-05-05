@@ -95,7 +95,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <Container>
-        <ScrollView style={{flex: 1, margin: 0}}>
+        <ScrollView style={{flex: 1, marginTop: 60}}>
           <View style={styles.setsBox}>
             <View style={styles.setsLabel}>
               <Text style={styles.labels}>

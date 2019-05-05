@@ -4,7 +4,8 @@ import { colors } from './index';
 const styles = StyleSheet.create({
   tableBox: {
     flex: 1,
-    width: 300
+    width: 300,
+    marginTop: 60,
   },
   tableHeader: { 
     borderColor: 'gray', 
