@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
   inputsNumberTxt: {
     color: colors.middleBlue,
     textAlign: 'center',
+    fontSize: 12,
   },
   inputsNumberTxtBorder: {
     borderRadius: 10,

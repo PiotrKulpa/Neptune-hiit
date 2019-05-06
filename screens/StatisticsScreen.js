@@ -54,16 +54,16 @@ export default class StatisticssScreen extends Component {
        
         <View style={styles.tableHeader}>
           <Text style={[styles.tableTd, {flex: 4}]}>Date:</Text>
-          <Text style={styles.tableTd}>Sets:</Text>
-          <Text style={styles.tableTd}>Time:</Text>
+          <Text style={[styles.tableTd, {textAlign: 'center'}]}>Sets:</Text>
+          <Text style={[styles.tableTd, {textAlign: 'center'}]}>Time:</Text>
         </View>
          
         {this.state.results._array && this.state.results._array.length > 0 ? 
           this.state.results._array.map(el =>  
             <View style={styles.tableRow} key={el.id}>
               <Text style={[styles.tableTd, {flex: 4}]}>{el.date}</Text>
-              <Text style={styles.tableTd}>{el.sets}</Text>
-              <Text style={styles.tableTd}>{el.value}</Text>
+              <Text style={[styles.tableTd, {textAlign: 'center'}]}>{el.sets}</Text>
+              <Text style={[styles.tableTd, , {textAlign: 'center'}]}>{el.value}</Text>
             </View>
            ) : 
           <Text>No stats</Text>  

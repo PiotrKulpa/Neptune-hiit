@@ -99,7 +99,7 @@ class SettingsScreen extends Component {
           <View style={styles.setsBox}>
             <View style={styles.setsLabel}>
               <Text style={styles.labels}>
-                SET(S): {this.state.setsNumber}
+                SET(S): <Text style={{color: 'white'}}> {this.state.setsNumber}</Text>
               </Text>
             </View>
             <View style={styles.btnsLabel}>
