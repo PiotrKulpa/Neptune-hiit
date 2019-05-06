@@ -13,7 +13,10 @@ import Done from './Done';
 //TODO:
 // load sound
 
-const soundObject = new Expo.Audio.Sound();
+//const soundObject = new Expo.Audio.Sound();
+//soundObject.loadAsync(require('../assets/sounds/beep.mp3')).then(sound => console.log(sound));
+
+
 
 const db = SQLite.openDatabase('results');
 
@@ -45,20 +48,8 @@ class Timer extends Component {
     
   }
 
-  onLoadSound() {
-
-    (async() => {
-      try {
-        await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
-        await soundObject.playAsync();
-        console.log('onLoadSound');
-        // Your sound is playing!
-      } catch (error) {
-        // An error occurred!
-        console.log(error);   
-      }
-    }) ();
-    
+  onLoadSound= () => {
+    //soundObject.playAsync(); 
   }
 
   
