@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
     flex: 1,
   },
   content: {
@@ -13,9 +14,9 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
     flexDirection: 'column',
     justifyContent: 'center',
-    //alignItems: 'center',
-    alignSelf: 'center',
+    alignSelf: 'stretch',
     flex: 11,
+    paddingHorizontal: 30
   },
   addMob: {
     alignSelf: 'flex-end',

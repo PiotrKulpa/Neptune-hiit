@@ -39,18 +39,10 @@ export default class StatisticssScreen extends Component {
   render() {
     return (
       <Container>
-        <ActivityIndicator 
-          style={{position: 'absolute', top: '50%', alignSelf: 'center',}} 
-          size="large" 
-          color="#0000ff" 
-          animating={this.state.showLoader} 
-        />
+       
 
-        <NavigationEvents
-          onWillFocus={this.onFocus}
-        />
         
-        <ScrollView style={styles.tableBox}>
+        <ScrollView style={{flex: 1, marginTop: 60,}}>
        
         <View style={styles.tableHeader}>
           <Text style={[styles.tableTd, {flex: 4}]}>Date:</Text>
@@ -69,6 +61,15 @@ export default class StatisticssScreen extends Component {
           <Text>No stats</Text>  
         }
         </ScrollView>
+        <NavigationEvents
+          onWillFocus={this.onFocus}
+        />
+         <ActivityIndicator 
+          style={{position: 'absolute', top: '50%', alignSelf: 'center',}} 
+          size="large" 
+          color="#0000ff" 
+          animating={this.state.showLoader} 
+        />
       </Container>
     )
   }
