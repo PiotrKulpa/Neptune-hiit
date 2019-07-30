@@ -38,6 +38,7 @@ class Timer extends Component {
   onLoadSound = async () => {
 
     const soundObject = new Expo.Audio.Sound();
+   
       try {
         await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
       { shouldPlay: true }
@@ -48,6 +49,8 @@ class Timer extends Component {
        // Your sound is playing!
       } catch (error) {
       // An error occurred!
+      console.log(error);
+      
       } 
   }
 
