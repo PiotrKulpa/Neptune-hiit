@@ -4,7 +4,8 @@ import { colors } from './index';
 const styles = StyleSheet.create({
   tableBox: {
     flex: 1,
-    width: 300
+    width: 300,
+    marginTop: 60,
   },
   tableHeader: { 
     borderColor: 'gray', 
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingVertical: 10,
   },
   tableTd: {
     color: 'white',

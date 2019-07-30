@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from '../stylesheet/applyButton';
 import { LinearGradient } from 'expo';
 
 const ApplyButton = props => {
   return (
-      <TouchableWithoutFeedback
+      <TouchableOpacity
       {...props}
       >
         <LinearGradient
@@ -17,7 +17,7 @@ const ApplyButton = props => {
             {props.children}
           </Text>
           </LinearGradient>
-      </TouchableWithoutFeedback>  
+      </TouchableOpacity>  
   )
 }
 

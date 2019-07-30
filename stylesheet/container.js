@@ -4,16 +4,23 @@ import { Constants } from 'expo';
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    width: '100%', 
-    height: '100%'
+    flex: 1,
   },
   content: {
     color: 'white',
-    marginTop: Constants.statusBarHeight + 60,
+    marginTop: Constants.statusBarHeight,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    //alignItems: 'center',
     alignSelf: 'center',
+    flex: 11,
   },
+  addMob: {
+    alignSelf: 'flex-end',
+    flex: 1,
+  }
 });
 
 export default styles;

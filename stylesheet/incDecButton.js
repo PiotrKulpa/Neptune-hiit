@@ -3,11 +3,11 @@ import { colors } from '.';
 
 const styles = StyleSheet.create({
   applyBtnBg: {
-    height: 60,
-    width: 60,
+    height: 50,
+    width: 50,
     flexDirection: 'column',
     justifyContent: 'center',
-    borderRadius: 30,
+    borderRadius: 25,
     shadowColor: '#fff',
     shadowOffset: {width: 10, height: 10},
     shadowOpacity: 0.5,
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     marginHorizontal: 5,
     backgroundColor: colors.lightRed,
+    margin: 5,
   },
   btnTxt: {
     color: colors.text,

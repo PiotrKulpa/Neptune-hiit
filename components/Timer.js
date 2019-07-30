@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View, Animated, Easing, } from 'react-native';
+import { Text, View, Animated, Easing, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
 import MainButton from '../components/MainButton';
-import { Font, SQLite } from 'expo';
+import { Font, SQLite, Audio } from 'expo';
+import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
+import Done from './Done';
 
 
-//TODO: style msg
-// write record to db
+//TODO:
+// load sound
+
+//const soundObject = new Expo.Audio.Sound();
+//soundObject.loadAsync(require('../assets/sounds/beep.mp3')).then(sound => console.log(sound));
+
+
 
 const db = SQLite.openDatabase('results');
 
@@ -21,7 +28,7 @@ class Timer extends Component {
     counter: 0,
     fontsLoaded: false,
     duration: this.props.intervals[0], // durations in seconds
-    msg: '',
+    wellDone: false,
   }
 
   componentDidMount() {
@@ -37,12 +44,18 @@ class Timer extends Component {
         'create table if not exists intervals (id integer primary key not null, date text, sets int, value int);'
       );
     });
+
     
-    
+  }
+
+  onLoadSound= () => {
+    //soundObject.playAsync(); 
   }
 
   
   onStart = () => {
+
+    this.onLoadSound();
     // reset timer
     this.state.timerAnim.resetAnimation();
     // reset counter
@@ -61,14 +74,14 @@ class Timer extends Component {
 
         // methods after all sets finished
         if(n === this.props.intervals.length -1) {
+          Vibration.vibrate([0, 100, 200, 100, 200, 100]);
           this.state.timerAnim.removeAllListeners();
           n = 0;
           this.state.timerAnim._value = 0;
           this.setState({
             duration: 0,
-            msg: 'Nice job! You have finished all intervals.'
+            wellDone: true,
           });
-          //TODO write record to DB
           this.writeToDB();
           return;
         };
@@ -76,9 +89,10 @@ class Timer extends Component {
         this.setState({duration: this.props.intervals[n]}, this.onAnimate(n));
       }; 
     });
+    
     this.setState({
       duration: this.props.intervals[0],
-      msg: '',
+      wellDone: false,
     }, this.onAnimate(n));
   }
 
@@ -89,12 +103,13 @@ class Timer extends Component {
     this.state.timerAnim._value = 100;
     this.setState({
       duration: this.props.intervals[0],
-      msg: '',
+      wellDone: false,
     })
   }
 
   onAnimate(n) {
     const {intervals} = this.props;
+    Vibration.vibrate(500);
     
       Animated.timing(                 
         this.state.timerAnim,            
@@ -113,9 +128,6 @@ class Timer extends Component {
     this.setState({
       duration: this.props.intervals[0]
     });
-
-    console.log(this.props.intervals[0]);
-    
   }
 
   writeToDB() {
@@ -155,8 +167,15 @@ class Timer extends Component {
                   shadowColor="#1d305b"
                   bgColor="#304876"
               >
-                  <Text style={{ fontSize: 68, color: "#35e3ee", }}>{timerTime}</Text>
-                  <Text style={{ fontSize: 22, color: "white", }}>{'to Complete'}</Text>
+                  <View style={!this.state.wellDone ? {display: 'flex'} : {display: 'none'}}>
+                    <Text style={{ fontSize: 68, color: "#35e3ee", textAlign: 'center'}}>{timerTime}</Text>
+                    <Text style={{ fontSize: 22, color: "white", }}>{'to Complete'}</Text>
+                  </View>
+                  <View style={this.state.wellDone ? {display: 'flex'} : {display: 'none'}}>
+                    {this.state.wellDone && <Done />}
+                    
+                    <Text style={{ fontSize: 22, color: "white", }}>{'Well Done!'}</Text>
+                  </View>
               </ProgressCircle>
             </Animated.View>
           </View>

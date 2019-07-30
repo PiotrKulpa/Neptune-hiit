@@ -95,11 +95,11 @@ class SettingsScreen extends Component {
   render() {
     return (
       <Container>
-        <ScrollView style={{flex: 1, margin: 0}}>
+        <ScrollView style={{flex: 1, marginTop: 60}}>
           <View style={styles.setsBox}>
             <View style={styles.setsLabel}>
               <Text style={styles.labels}>
-                {this.state.setsNumber}: SET(S)
+                SET(S): <Text style={{color: 'white'}}> {this.state.setsNumber}</Text>
               </Text>
             </View>
             <View style={styles.btnsLabel}>
@@ -117,37 +117,48 @@ class SettingsScreen extends Component {
           </View>
             
             {this.state.sets && this.state.sets.map((el, i) => 
-              <View key={i}>
-                <View>
-                  <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
-                  <TextInput
-                      keyboardType={'numeric'}
-                      style={styles.inputs}
-                      defaultValue={el.active}
-                      onChangeText={(value)=> this.onActiveInputChange(value, i)}
-                  >
-                  </TextInput>
+              <View style={styles.inputsContainer} key={i}>
+                
+                <View style={styles.inputsNumber}>
+                  <View style={styles.inputsNumberTxtBorder}>
+                    <Text style={styles.inputsNumberTxt}>
+                      {i+1}
+                    </Text>
+                  </View>
                 </View>
-                <View>
-                  <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
-                  <TextInput
-                      keyboardType={'numeric'}
-                      style={{height: 40, borderColor: 'gray', borderBottomWidth: 1, color: 'white'}}
-                      defaultValue={el.rest}
-                      onChangeText={(value)=> this.onRestInputChange(value, i)}
-                  >
-                  </TextInput>
+                <View style={styles.inputsRow}>
+                  <View>
+                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
+                    <TextInput
+                        style={styles.inputsActive}
+                        keyboardType={'numeric'}
+                        defaultValue={el.active}
+                        onChangeText={(value)=> this.onActiveInputChange(value, i)}
+                    >
+                    </TextInput>
+                  </View>
+                  <View style={styles.inputRestBox}>
+                    <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
+                    <TextInput
+                        style={styles.inputsRest}
+                        keyboardType={'numeric'}
+                        defaultValue={el.rest}
+                        onChangeText={(value)=> this.onRestInputChange(value, i)}
+                    >
+                    </TextInput>
+                  </View>
                 </View>
               </View>
             )}
-            <ApplyButton
+            
+        </ScrollView>
+        <ApplyButton
               {...this.props}
                 onPress={() => this.onApply()} 
                 disabled={this.state.deactivate} 
               >
                 Apply
             </ApplyButton>
-        </ScrollView>
       </Container>
     )
   }
