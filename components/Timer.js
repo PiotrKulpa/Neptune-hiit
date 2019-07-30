@@ -21,6 +21,13 @@ import Done from './Done';
 const db = SQLite.openDatabase('results');
 
 class Timer extends Component {
+  constructor(props)
+    {
+      super(props);
+
+      this.soundObject = new Audio.Sound();
+
+    }
 
   state = {
     n: 0,
@@ -29,6 +36,7 @@ class Timer extends Component {
     fontsLoaded: false,
     duration: this.props.intervals[0], // durations in seconds
     wellDone: false,
+    isTimerRun: false,
   }
 
   componentDidMount() {
@@ -45,16 +53,19 @@ class Timer extends Component {
       );
     });
 
-    
+    this.soundObject.loadAsync(require('../assets/sounds/beep.mp3')).then(sound => {
+      console.log(sound);
+      this.soundObject.playAsync();
+    });
   }
 
   onLoadSound= () => {
-    //soundObject.playAsync(); 
+   this.soundObject.playAsync().then(() => console.log('uruchomils ie dzwiek')); 
   }
 
   
   onStart = () => {
-
+    //this.soundObject.playAsync();
     this.onLoadSound();
     // reset timer
     this.state.timerAnim.resetAnimation();
@@ -81,6 +92,7 @@ class Timer extends Component {
           this.setState({
             duration: 0,
             wellDone: true,
+            isTimerRun: false,
           });
           this.writeToDB();
           return;
@@ -93,6 +105,7 @@ class Timer extends Component {
     this.setState({
       duration: this.props.intervals[0],
       wellDone: false,
+      isTimerRun: true,
     }, this.onAnimate(n));
   }
 
@@ -125,9 +138,11 @@ class Timer extends Component {
    }
 
   onFocus = () => {
-    this.setState({
-      duration: this.props.intervals[0]
-    });
+    if(!this.state.isTimerRun) {
+      this.setState({
+        duration: this.props.intervals[0],
+      });
+    }
   }
 
   writeToDB() {

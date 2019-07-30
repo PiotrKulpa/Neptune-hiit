@@ -3,9 +3,11 @@ import { colors } from './index';
 
 const styles = StyleSheet.create({
   tableBox: {
-    flex: 1,
-    width: 300,
-    marginTop: 60,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    paddingTop: 60,
+    paddingBottom: 100,
   },
   tableHeader: { 
     borderColor: 'gray', 
@@ -13,8 +15,10 @@ const styles = StyleSheet.create({
     color: 'white',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    alignSelf: 'stretch',
+    paddingVertical: 10,
   },
   tableRow: { 
     borderColor: 'gray', 
@@ -22,9 +26,10 @@ const styles = StyleSheet.create({
     color: 'white',
     flex: 1,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 10,
+    alignSelf: 'stretch',
   },
   tableTd: {
     color: 'white',
