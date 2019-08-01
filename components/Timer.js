@@ -2,21 +2,13 @@ import React, { Component } from 'react';
 import { Text, View, Animated, Easing, Vibration } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import styles from '../stylesheet/timer';
+import { colors } from '../stylesheet/index';
 import MainButton from '../components/MainButton';
 import { Font, SQLite, Audio } from 'expo';
 import { FontAwesome } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
 import Done from './Done';
-
-
-//TODO:
-// load sound
-
-//const soundObject = new Expo.Audio.Sound();
-//soundObject.loadAsync(require('../assets/sounds/beep.mp3')).then(sound => console.log(sound));
-
-
 
 const db = SQLite.openDatabase('results');
 
@@ -33,6 +25,8 @@ class Timer extends Component {
     duration: this.props.intervals[0], // durations in seconds
     wellDone: false,
     isTimerRun: false,
+    setColor: colors.lightBlue,
+    countSets: 1,
   }
 
   onLoadSound = async () => {
@@ -41,11 +35,10 @@ class Timer extends Component {
    
       try {
         await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
-      { shouldPlay: true }
         this.audioPlayer1  = soundObject;
-          this.audioPlayer1.playAsync();
-          this.audioPlayer1.setPositionAsync(0);
-          this.audioPlayer1.setRateAsync(3, false);
+        await this.audioPlayer1.playAsync();
+        await this.audioPlayer1.setPositionAsync(0);
+          // await this.audioPlayer1.setRateAsync(3, false);
        // Your sound is playing!
       } catch (error) {
       // An error occurred!
@@ -76,8 +69,6 @@ class Timer extends Component {
     });
 
   }
-
-  
 
 
   onStart = () => {
@@ -110,11 +101,22 @@ class Timer extends Component {
             duration: 0,
             wellDone: true,
             isTimerRun: false,
+            setColor: colors.lightBlue,
           });
           this.writeToDB();
           return;
         };
         n++;
+        
+        // calculate rest or rush
+        if(n % 2 === 0) {
+          this.setState({setColor: colors.lightBlue});
+        } else {
+          this.setState({setColor: colors.lightRed});
+          this.setState((state) => ({countSets: state.countSets + 1}), () => console.log(this.state.countSets))
+        }
+        // calculate sets
+        
         this.setState({ duration: this.props.intervals[n] }, this.onAnimate(n));
       };
     });
@@ -128,12 +130,14 @@ class Timer extends Component {
 
   onReset = () => {
     // reset timer
+    this.setState({countSets: this.props.intervals.length / 2});
     this.state.timerAnim.resetAnimation();
     this.state.timerAnim.removeAllListeners();
     this.state.timerAnim._value = 100;
     this.setState({
       duration: this.props.intervals[0],
       wellDone: false,
+      setColor: colors.lightBlue,
     })
   }
 
@@ -191,17 +195,20 @@ class Timer extends Component {
                   ...this.props.style,
                 }}
               >
+                <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
+                  <Text style={{ fontSize: 12, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}</Text>
+                </View>
                 <ProgressCircle
                   percent={timerAnim._value}
                   radius={120}
                   borderWidth={8}
-                  color="#35e3ee"
+                  color={this.state.setColor}
                   shadowColor="#1d305b"
                   bgColor="#304876"
                 >
                   <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
-                    <Text style={{ fontSize: 68, color: "#35e3ee", textAlign: 'center' }}>{timerTime}</Text>
-                    <Text style={{ fontSize: 22, color: "white", }}>{'to Complete'}</Text>
+                    <Text style={{ fontSize: 68, color: this.state.setColor, textAlign: 'center' }}>{timerTime}</Text>
+                    <Text style={{ fontSize: 22, color: this.state.setColor, }}>{'to Complete'}</Text>
                   </View>
                   <View style={this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
                     {this.state.wellDone && <Done />}
