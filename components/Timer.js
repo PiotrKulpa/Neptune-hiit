@@ -27,6 +27,7 @@ class Timer extends Component {
     isTimerRun: false,
     setColor: colors.lightBlue,
     countSets: 1,
+    countAllSets: this.props.intervals.length / 2,
   }
 
   onLoadSound = async () => {
@@ -75,6 +76,9 @@ class Timer extends Component {
     this.onLoadSound();
     // reset timer
     this.state.timerAnim.resetAnimation();
+    this.setState({
+      countSets: 1,
+    });
     // reset counter
     let n = 0;
     //reset value to 100
@@ -111,9 +115,10 @@ class Timer extends Component {
         // calculate rest or rush
         if(n % 2 === 0) {
           this.setState({setColor: colors.lightBlue});
+          this.setState((state) => ({countSets: state.countSets + 1}), () => console.log(this.state.countSets))
+
         } else {
           this.setState({setColor: colors.lightRed});
-          this.setState((state) => ({countSets: state.countSets + 1}), () => console.log(this.state.countSets))
         }
         // calculate sets
         
@@ -130,7 +135,9 @@ class Timer extends Component {
 
   onReset = () => {
     // reset timer
-    this.setState({countSets: this.props.intervals.length / 2});
+    this.setState({
+      countSets: 1,
+    });
     this.state.timerAnim.resetAnimation();
     this.state.timerAnim.removeAllListeners();
     this.state.timerAnim._value = 100;
@@ -162,6 +169,7 @@ class Timer extends Component {
     if (!this.state.isTimerRun) {
       this.setState({
         duration: this.props.intervals[0],
+        countAllSets: this.props.intervals.length / 2
       });
     }
   }
@@ -196,7 +204,7 @@ class Timer extends Component {
                 }}
               >
                 <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
-                  <Text style={{ fontSize: 12, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}</Text>
+                  <Text style={{ fontSize: 12, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}/{this.state.countAllSets}</Text>
                 </View>
                 <ProgressCircle
                   percent={timerAnim._value}
