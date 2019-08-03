@@ -7,6 +7,7 @@ import ApplyButton from '../components/ApplyButton';
 import IncDecButton from '../components/IncDecButton';
 import Inputs from '../components/Inputs';
 import styles from '../stylesheet/inputs';
+import Done from '../components/Done';
 
 class SettingsScreen extends Component {
 
@@ -14,6 +15,7 @@ class SettingsScreen extends Component {
     sets: [{active: '5', rest: '5'},],
     setsNumber: 1,
     deactivate: false,
+    settingsUpdated: false,
   }
 
   onApply() {
@@ -24,8 +26,13 @@ class SettingsScreen extends Component {
     let setsToArray = [].concat.apply([], setsToNumbers);
     this.props.setIntervals(setsToArray);
 
-    console.log(setsToArray);
-    
+    //add somekind of popup
+    this.setState({
+      settingsUpdated: true,
+    }, () => {
+      setTimeout(() => {this.setState({settingsUpdated: false})}, 500)
+      
+    })
   }
 
   onAddSet() {
@@ -159,6 +166,9 @@ class SettingsScreen extends Component {
               >
                 Apply
             </ApplyButton>
+            <View style={{position: 'absolute', alignSelf: 'center'}}>
+            {this.state.settingsUpdated && <Done type="bounceOut"/>}
+            </View>
       </Container>
     )
   }

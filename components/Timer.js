@@ -203,9 +203,7 @@ class Timer extends Component {
                   ...this.props.style,
                 }}
               >
-                <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
-                  <Text style={{ fontSize: 12, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}/{this.state.countAllSets}</Text>
-                </View>
+                
                 <ProgressCircle
                   percent={timerAnim._value}
                   radius={120}
@@ -214,12 +212,14 @@ class Timer extends Component {
                   shadowColor="#1d305b"
                   bgColor="#304876"
                 >
+                  
                   <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
+                    <Text style={{ textAlign: 'center', fontSize: 14, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}/{this.state.countAllSets}</Text>
                     <Text style={{ fontSize: 68, color: this.state.setColor, textAlign: 'center' }}>{timerTime}</Text>
                     <Text style={{ fontSize: 22, color: this.state.setColor, }}>{'to Complete'}</Text>
                   </View>
                   <View style={this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
-                    {this.state.wellDone && <Done />}
+                    {this.state.wellDone && <Done type="bounceIn"/>}
 
                     <Text style={{ fontSize: 22, color: "white", }}>{'Well Done!'}</Text>
                   </View>

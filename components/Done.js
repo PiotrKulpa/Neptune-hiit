@@ -7,7 +7,7 @@ export default class Done extends Component {
   render() {
     return (
       <View>
-        <Animatable.View animation="bounceIn">
+        <Animatable.View animation={this.props.type}>
           <FontAwesome style={{textAlign: 'center'}} name="check-circle" size={92} color="#35e3ee" />
         </Animatable.View>     
       </View>
