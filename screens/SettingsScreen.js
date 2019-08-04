@@ -102,8 +102,9 @@ class SettingsScreen extends Component {
   render() {
     return (
       <Container>
-        <ScrollView contentContainerStyle={styles.setsBox}>
-          <>
+        <ScrollView>
+        {/* <ScrollView contentContainerStyle={styles.setsBox}> */}
+          <View style={styles.topWrapper}>
             <View style={styles.setsLabel}>
               <Text style={styles.labels}>
                 SET(S): <Text style={{color: 'white'}}> {this.state.setsNumber}</Text>
@@ -121,7 +122,7 @@ class SettingsScreen extends Component {
               -
               </IncDecButton>
             </View>
-          </>
+          </View>
             
             {this.state.sets && this.state.sets.map((el, i) => 
               <View style={styles.inputsContainer} key={i}>
