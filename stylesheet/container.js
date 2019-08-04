@@ -3,24 +3,21 @@ import { Constants } from 'expo';
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'stretch',
-    alignSelf: 'stretch',
-    flex: 1,
+    width: '100%', 
+    height: '100%'
   },
   content: {
     color: 'white',
-    marginTop: Constants.statusBarHeight,
+    marginTop: Constants.statusBarHeight + 50,
     flexDirection: 'column',
     justifyContent: 'center',
-    alignSelf: 'stretch',
-    flex: 11,
+    alignItems: 'center',
+    flex: 9,
     paddingHorizontal: 30
   },
   addMob: {
-    alignSelf: 'flex-end',
-    flex: 1,
+    // alignSelf: 'center',
+    // flex: 1,
   }
 });
 

@@ -4,15 +4,17 @@ import { colors } from './index';
 const styles = StyleSheet.create({
   inputsContainer: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     borderColor: 'rgba(142, 152, 173, 0.5)', 
     borderBottomWidth: 1,
+    // flex: 1,
   },
   inputsNumber: {
-    flex: 1,
+    // flex: 1,
   },
   inputsRow: {
-    flex: 10,
+    flex: 1,
   },
   inputs: {
     color: 'white',
@@ -40,22 +42,22 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   setsBox: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flexDirection: 'row',
+    // justifyContent: 'flex-start',
     alignItems: 'center',
-    flex: 1,
+    // flex: 1,
     borderColor: 'rgba(142, 152, 173, 0.5)', 
     borderBottomWidth: 1,  
   },
   setsLabel: {
-    flexDirection: 'row',
-    flex: 1,
+    // flexDirection: 'row',
+    // flex: 1,
   },
   btnsLabel: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+    // flexDirection: 'row',
+    // flex: 1,
+    // justifyContent: 'flex-end',
+    // alignItems: 'center',
   },
   inputsNumberTxt: {
     color: colors.middleBlue,

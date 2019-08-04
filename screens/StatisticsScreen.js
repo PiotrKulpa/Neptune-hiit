@@ -42,7 +42,8 @@ export default class StatisticssScreen extends Component {
        
 
         
-        <ScrollView style={{flex: 1, marginTop: 60,}}>
+        <ScrollView>
+        {/* <ScrollView contentContainerStyle={styles.tableBox}> */}
        
         <View style={styles.tableHeader}>
           <Text style={[styles.tableTd, {flex: 4}]}>Date:</Text>
