@@ -28,6 +28,7 @@ class Timer extends Component {
     setColor: colors.lightBlue,
     countSets: 1,
     countAllSets: this.props.intervals.length / 2,
+    setCategory: 'REST',
   }
 
   onLoadSound = async () => {
@@ -78,6 +79,7 @@ class Timer extends Component {
     this.state.timerAnim.resetAnimation();
     this.setState({
       countSets: 1,
+      setCategory: 'REST'
     });
     // reset counter
     let n = 0;
@@ -114,11 +116,17 @@ class Timer extends Component {
         
         // calculate rest or rush
         if(n % 2 === 0) {
-          this.setState({setColor: colors.lightBlue});
+          this.setState({
+            setColor: colors.lightBlue,
+            setCategory: 'REST'
+          });
           this.setState((state) => ({countSets: state.countSets + 1}), () => console.log(this.state.countSets))
 
         } else {
-          this.setState({setColor: colors.lightRed});
+          this.setState({
+            setColor: colors.lightRed,
+            setCategory: 'ACTIVE'
+          });
         }
         // calculate sets
         
@@ -137,6 +145,7 @@ class Timer extends Component {
     // reset timer
     this.setState({
       countSets: 1,
+      setCategory: 'REST',
     });
     this.state.timerAnim.resetAnimation();
     this.state.timerAnim.removeAllListeners();
@@ -166,6 +175,8 @@ class Timer extends Component {
   }
 
   onFocus = () => {
+    console.log(this.state.isTimerRun);
+    
     if (!this.state.isTimerRun) {
       this.setState({
         duration: this.props.intervals[0],
@@ -214,6 +225,7 @@ class Timer extends Component {
                 >
                   
                   <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
+                    <Text style={{ textAlign: 'center', fontSize: 14, color: this.state.setColor, }}>{this.state.setCategory}</Text>
                     <Text style={{ textAlign: 'center', fontSize: 14, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}/{this.state.countAllSets}</Text>
                     <Text style={{ fontSize: 68, color: this.state.setColor, textAlign: 'center' }}>{timerTime}</Text>
                     <Text style={{ fontSize: 22, color: this.state.setColor, }}>{'to Complete'}</Text>
@@ -230,6 +242,7 @@ class Timer extends Component {
 
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <MainButton
+              disable={this.state.isTimerRun}
               onPress={this.onStart}
             >
               <Text style={{ fontFamily: 'sans-pro-light' }}>START</Text>

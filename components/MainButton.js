@@ -6,6 +6,7 @@ const MainButton = props => {
   return (
       <TouchableWithoutFeedback
       {...props}
+      disabled={props.disable}
       >
         <View style={styles.btnBg}>
           <Text style={styles.btnTxt}>
