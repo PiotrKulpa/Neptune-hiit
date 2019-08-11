@@ -139,7 +139,7 @@ class SettingsScreen extends Component {
                 </View>
                 <View style={styles.inputsRow}>
                   <View>
-                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
+                    <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
                     <TextInput
                         style={styles.inputsActive}
                         keyboardType={'numeric'}
@@ -149,7 +149,7 @@ class SettingsScreen extends Component {
                     </TextInput>
                   </View>
                   <View style={styles.inputRestBox}>
-                    <Text style={styles.labels}>{i+1}: REST INTERVAL</Text>
+                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
                     <TextInput
                         style={styles.inputsRest}
                         keyboardType={'numeric'}
