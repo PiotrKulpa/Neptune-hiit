@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView, TextInput, View, Button, } from 'react-native';
+import { Text, ScrollView, TextInput, View, KeyboardAvoidingView, } from 'react-native';
 import Container from '../components/Container';
 import { connect } from 'react-redux';
 import { setIntervals } from '../redux/actions'
@@ -101,9 +101,12 @@ class SettingsScreen extends Component {
 
   render() {
     return (
+      <KeyboardAvoidingView behavior='padding' enabled>
       <Container>
+        
         <ScrollView>
         {/* <ScrollView contentContainerStyle={styles.setsBox}> */}
+        
           <View style={styles.topWrapper}>
             <View style={styles.setsLabel}>
               <Text style={styles.labels}>
@@ -158,8 +161,9 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             )}
-            
+         
         </ScrollView>
+        
         <ApplyButton
               {...this.props}
                 onPress={() => this.onApply()} 
@@ -171,6 +175,7 @@ class SettingsScreen extends Component {
             {this.state.settingsUpdated && <Done type="bounceOut"/>}
             </View>
       </Container>
+      </KeyboardAvoidingView>
     )
   }
 }

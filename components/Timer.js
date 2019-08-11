@@ -19,7 +19,6 @@ class Timer extends Component {
 
   state = {
     n: 0,
-    timerAnim: new Animated.Value(100), //value for timer arc animation
     counter: 0,
     fontsLoaded: false,
     duration: this.props.intervals[0], // durations in seconds
@@ -29,6 +28,8 @@ class Timer extends Component {
     countSets: 1,
     countAllSets: this.props.intervals.length / 2,
     setCategory: 'REST',
+    timerAnim: new Animated.Value(100), //value for timer arc animation
+    
   }
 
   onLoadSound = async () => {
@@ -143,10 +144,6 @@ class Timer extends Component {
 
   onReset = () => {
     // reset timer
-    this.setState({
-      countSets: 1,
-      setCategory: 'REST',
-    });
     this.state.timerAnim.resetAnimation();
     this.state.timerAnim.removeAllListeners();
     this.state.timerAnim._value = 100;
@@ -154,7 +151,10 @@ class Timer extends Component {
       duration: this.props.intervals[0],
       wellDone: false,
       setColor: colors.lightBlue,
-    })
+      countSets: 1,
+      setCategory: 'REST',
+      isTimerRun: false,
+    });
   }
 
   onAnimate(n) {
