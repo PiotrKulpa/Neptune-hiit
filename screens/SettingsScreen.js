@@ -12,7 +12,7 @@ import Done from '../components/Done';
 class SettingsScreen extends Component {
 
   state = {
-    sets: [{active: '5', rest: '5'},],
+    sets: [{active: '30', rest: '30'},],
     setsNumber: 1,
     deactivate: false,
     settingsUpdated: false,
