@@ -14,6 +14,7 @@ const RouteConfigs = {
 const TabNavigatorConfig = {
   tabBarPosition: 'top',
   initialRouteName: 'Timer',
+  swipeEnabled: true,
   tabBarOptions: {
     style: {
       backgroundColor: 'transparent',

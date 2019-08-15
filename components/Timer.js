@@ -11,6 +11,7 @@ import { SQLite } from 'expo-sqlite';
 import { connect } from 'react-redux';
 import { NavigationEvents } from 'react-navigation';
 import Done from './Done';
+import { Audio } from 'expo-av';
 
 const db = SQLite.openDatabase('results');
 
@@ -35,7 +36,7 @@ class Timer extends Component {
   }
 
   onLoadSound = async () => {
-    const soundObject = new Expo.Audio.Sound();
+    const soundObject = new Audio.Sound();
       try {
         await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
         this.audioPlayer1  = soundObject;
@@ -51,7 +52,7 @@ class Timer extends Component {
 
   async componentWillMount(){
     try{
-      await Expo.Audio.setIsEnabledAsync(true);
+      await Audio.setIsEnabledAsync(true);
     } catch(error) {console.log(error);}
   }
 
