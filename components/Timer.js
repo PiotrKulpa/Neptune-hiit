@@ -33,32 +33,27 @@ class Timer extends Component {
   }
 
   onLoadSound = async () => {
-
     const soundObject = new Expo.Audio.Sound();
-   
       try {
         await soundObject.loadAsync(require('../assets/sounds/beep.mp3'));
         this.audioPlayer1  = soundObject;
         await this.audioPlayer1.playAsync();
         await this.audioPlayer1.setPositionAsync(0);
-          // await this.audioPlayer1.setRateAsync(3, false);
-       // Your sound is playing!
+        // await this.audioPlayer1.setRateAsync(3, false);
+        // Your sound is playing!
       } catch (error) {
-      // An error occurred!
-      console.log(error);
-      
+        // An error occurred!
+        console.log(error);
       } 
   }
 
   async componentWillMount(){
-    
     try{
       await Expo.Audio.setIsEnabledAsync(true);
     } catch(error) {console.log(error);}
   }
 
   componentDidMount() {
-
     //load custom fonts
     Font.loadAsync({
       'sans-pro-light': require('../assets/fonts/SourceSansPro-Light.ttf'),
@@ -70,7 +65,6 @@ class Timer extends Component {
         'create table if not exists intervals (id integer primary key not null, date text, sets int, value int);'
       );
     });
-
   }
 
 
@@ -121,7 +115,7 @@ class Timer extends Component {
             setColor: colors.lightBlue,
             setCategory: 'REST'
           });
-          this.setState((state) => ({countSets: state.countSets + 1}), () => console.log(this.state.countSets))
+          this.setState((state) => ({countSets: state.countSets + 1}));
 
         } else {
           this.setState({
@@ -175,8 +169,6 @@ class Timer extends Component {
   }
 
   onFocus = () => {
-    console.log(this.state.isTimerRun);
-    
     if (!this.state.isTimerRun) {
       this.setState({
         duration: this.props.intervals[0],
@@ -213,8 +205,7 @@ class Timer extends Component {
                 style={{
                   ...this.props.style,
                 }}
-              >
-                
+              >  
                 <ProgressCircle
                   percent={timerAnim._value}
                   radius={120}
@@ -222,13 +213,12 @@ class Timer extends Component {
                   color={this.state.setColor}
                   shadowColor="#1d305b"
                   bgColor="#304876"
-                >
-                  
+                > 
                   <View style={!this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
                     <Text style={{ textAlign: 'center', fontSize: 14, color: this.state.setColor, }}>{this.state.setCategory}</Text>
                     <Text style={{ textAlign: 'center', fontSize: 14, color: this.state.setColor, }}>{'Set: '}{this.state.countSets}/{this.state.countAllSets}</Text>
-                    <Text style={{ fontSize: 68, color: this.state.setColor, textAlign: 'center' }}>{timerTime}</Text>
-                    <Text style={{ fontSize: 22, color: this.state.setColor, }}>{'to Complete'}</Text>
+                    <Text style={{ fontSize: 68, color: this.state.setColor, textAlign: 'center' }}>{timerTime}<Text style={{ fontSize: 18,}}> s.</Text></Text>
+                    <Text style={{ fontSize: 22, color: this.state.setColor, textAlign: 'center'}}>{'to Complete'}</Text>
                   </View>
                   <View style={this.state.wellDone ? { display: 'flex' } : { display: 'none' }}>
                     {this.state.wellDone && <Done type="bounceIn"/>}
@@ -239,7 +229,6 @@ class Timer extends Component {
               </Animated.View>
             </View>
           </View>
-
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <MainButton
               disable={this.state.isTimerRun}
@@ -254,10 +243,8 @@ class Timer extends Component {
             </MainButton>
           </View>
           <View><Text>{this.state.msg}</Text></View>
-
         </View>
       ) : null
-
     )
   }
 }
@@ -267,4 +254,5 @@ const mapStateToProps = state => {
     intervals: state.intervals
   }
 }
+
 export default connect(mapStateToProps)(Timer);

@@ -70,7 +70,6 @@ class SettingsScreen extends Component {
     
     // 3. Replace the property you're intested in
     item.active = value;
-    console.log(item);
     // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
     items[i] = item;
     // 5. Set the state to our new copy
@@ -91,7 +90,6 @@ class SettingsScreen extends Component {
     
     // 3. Replace the property you're intested in
     item.rest = value;
-    console.log(item);
     // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
     items[i] = item;
     // 5. Set the state to our new copy
@@ -106,9 +104,9 @@ class SettingsScreen extends Component {
         
         <ScrollView>
         {/* <ScrollView contentContainerStyle={styles.setsBox}> */}
-        
           <View style={styles.topWrapper}>
             <View style={styles.setsLabel}>
+             
               <Text style={styles.labels}>
                 SET(S): <Text style={{color: 'white'}}> {this.state.setsNumber}</Text>
               </Text>
@@ -149,7 +147,7 @@ class SettingsScreen extends Component {
                     </TextInput>
                   </View>
                   <View style={styles.inputRestBox}>
-                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL</Text>
+                    <Text style={styles.labels}>{i+1}: ACTIVE INTERVAL </Text>
                     <TextInput
                         style={styles.inputsRest}
                         keyboardType={'numeric'}
@@ -161,7 +159,7 @@ class SettingsScreen extends Component {
                 </View>
               </View>
             )}
-         
+          <Text style={styles.labels}>* Time is set in seconds</Text>
         </ScrollView>
         
         <ApplyButton
@@ -181,7 +179,6 @@ class SettingsScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  //console.log(state)
   return {
     intervals: state.intervals
   }

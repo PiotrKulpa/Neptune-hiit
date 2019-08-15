@@ -5,9 +5,6 @@ import { NavigationEvents } from 'react-navigation';
 import { SQLite } from 'expo';
 import styles from '../stylesheet/stats';
 
-
-//TODO: style table with resuslts
-
 const db = SQLite.openDatabase('results');
 
 export default class StatisticssScreen extends Component {
@@ -18,7 +15,6 @@ export default class StatisticssScreen extends Component {
   }
 
   onFocus = () => {
-
     this.setState({
       showLoader: true,
     }); 
@@ -29,28 +25,21 @@ export default class StatisticssScreen extends Component {
           this.setState({
             results: rows,
             showLoader: false,
-          }, console.log(this.state.results))  
+          });  
         }
       );
     });  
-    
   }
 
   render() {
     return (
-      <Container>
-       
-
-        
-        <ScrollView>
-        {/* <ScrollView contentContainerStyle={styles.tableBox}> */}
-       
+      <Container> 
+        <ScrollView>   
         <View style={styles.tableHeader}>
           <Text style={[styles.tableTd, {flex: 4}]}>Date:</Text>
           <Text style={[styles.tableTd, {textAlign: 'center'}]}>Sets:</Text>
           <Text style={[styles.tableTd, {textAlign: 'center'}]}>Time:</Text>
         </View>
-         
         {this.state.results._array && this.state.results._array.length > 0 ? 
           this.state.results._array.map(el =>  
             <View style={styles.tableRow} key={el.id}>
