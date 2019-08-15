@@ -162,13 +162,13 @@ class SettingsScreen extends Component {
           <Text style={styles.labels}>* Time is set in seconds</Text>
         </ScrollView>
         
-        <ApplyButton
+        {/* <ApplyButton
               {...this.props}
                 onPress={() => this.onApply()} 
                 disabled={this.state.deactivate} 
               >
                 Apply
-            </ApplyButton>
+            </ApplyButton> */}
             <View style={{position: 'absolute', alignSelf: 'center'}}>
             {this.state.settingsUpdated && <Done type="bounceOut"/>}
             </View>

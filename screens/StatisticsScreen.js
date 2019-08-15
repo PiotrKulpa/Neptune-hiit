@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, ScrollView, ActivityIndicator } from 'react-native';
 import Container from '../components/Container';
 import { NavigationEvents } from 'react-navigation';
-import { SQLite } from 'expo';
+import { SQLite } from 'expo-sqlite';
 import styles from '../stylesheet/stats';
 
 const db = SQLite.openDatabase('results');

@@ -2,7 +2,8 @@ import { createAppContainer, createMaterialTopTabNavigator } from 'react-navigat
 import TimerScreen from '../screens/TimerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import StatisticsScreen from '../screens/StatisticsScreen';
-import { Constants } from 'expo';
+// import { Constants } from 'expo';
+import Constants from 'expo-constants';
 
 const RouteConfigs = {
   Timer: { screen: TimerScreen },

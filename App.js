@@ -9,7 +9,7 @@ import reducers from './redux/reducers';
 const store = createStore(reducers);
 const AppContainer = createAppContainer(TabNavigator);
 
-export default class App extends React.Component {
+class App extends React.Component {
 
   render() {
     return (
@@ -23,3 +23,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   
 });
+
+export default App;
