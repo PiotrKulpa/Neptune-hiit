@@ -22,13 +22,14 @@
       "**/*"
     ],
     "android": {
-      "versionCode": 2,
+      "versionCode": 3,
       "package": "com.piotrkulpa.neptunehiittimer",
       "permissions": [
         "CAMERA",
         "RECORD_AUDIO",
         "READ_PHONE_STATE",
-        "READ_CONTACTS"
+        "READ_CONTACTS",
+        "VIBRATE"
       ]
     }
   }
