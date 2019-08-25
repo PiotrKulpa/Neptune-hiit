@@ -23,8 +23,8 @@ export default class Container extends Component {
           <View style={{flexDirection: 'row',  alignSelf: 'center'}}>
             <AdMobBanner
               style={styles.addMob}
-              bannerSize="fullBanner"
-              adUnitID="ca-app-pub-5596351936987510/6497946272" // Test ID, Replace with your-admob-unit-id
+              bannerSize="smartBannerPortrait"
+              adUnitID="ca-app-pub-5596351936987510/1475895321" // Test ID, Replace with your-admob-unit-id
               testDeviceID="EMULATOR"
               onDidFailToReceiveAdWithError={this.bannerError} 
             />
