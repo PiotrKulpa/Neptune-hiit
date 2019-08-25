@@ -1,20 +1,19 @@
 {
   "expo": {
     "name": "Neptune - HIIT Timer",
-    "slug": "neptune-hiit",
+    "slug": "hiit",
     "privacy": "public",
-    "sdkVersion": "32.0.0",
+    "sdkVersion": "34.0.0",
     "platforms": [
-      "ios",
       "android"
     ],
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#5879bf"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,8 +21,16 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "versionCode": 4,
+      "package": "com.piotrkulpa.neptunehiittimer",
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "READ_PHONE_STATE",
+        "READ_CONTACTS",
+        "VIBRATE"
+      ]
     }
   }
 }
